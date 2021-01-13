@@ -3,8 +3,38 @@
   margin: 0;
 }
 
+.navbar {
+  background-color: rgba(94, 94, 104, 0.705);
+}
+
 .btn {
   margin-left: 10px;
+}
+
+#login-container {
+  height: 100vh;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+#login-form {
+  width: 40%;
+  margin: 4%;
+  margin-right: 10rem;
+  float: right;
+}
+
+#register-container {
+  height: 100vh;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+#register-form {
+  width: 40%;
+  margin: 4%;
+  margin-right: 10rem;
+  float: right;
 }
 
 .content {
@@ -22,3 +52,7 @@
   margin: 1vh;
 }
 
+.modal-footer {
+  display: flex;
+  justify-content: space-around;
+}

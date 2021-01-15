@@ -70,7 +70,7 @@ export default {
   name: "Register",
   data() {
     return {
-      server: "http://localhost:3000",
+      server: "https://kanbap.herokuapp.com",
       firstName: "",
       lastName: "",
       emailRegister: "",

@@ -54,7 +54,7 @@ export default {
   name: "Todo",
   data() {
     return {
-      server: "http://localhost:3000",
+      server: "https://kanbap.herokuapp.com",
       editTitle: "",
       editDescription: ""
     }

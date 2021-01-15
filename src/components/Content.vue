@@ -72,7 +72,7 @@ export default {
   name: "Content",
   data() {
     return {
-      server: "http://localhost:3000",
+      server: "https://kanbap.herokuapp.com",
       addTitle: "",
       addDescription: ""
     }

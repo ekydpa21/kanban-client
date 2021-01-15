@@ -32,7 +32,7 @@ export default {
   name: "App",
   data() {
     return {
-      server: "http://localhost:3000",
+      server: "https://kanbap.herokuapp.com",
       page: "login",
       tasks: [],
       categories: []

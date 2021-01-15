@@ -15,7 +15,8 @@
       v-if="page === 'logedin'" 
       @movePage="movePage"
       @newLists="allTasks"
-      :tasks="tasks">
+      :tasks="tasks"
+      :categories="categories">
     </Content>
 
   </div>
@@ -33,7 +34,8 @@ export default {
     return {
       server: "http://localhost:3000",
       page: "login",
-      tasks: []
+      tasks: [],
+      categories: []
     }
   },
   components: {
@@ -49,6 +51,7 @@ export default {
       if (localStorage.getItem("access_token")) {
         this.movePage("logedin")
         this.allTasks()
+        this.allCategories()
       } else {
         this.movePage("login")
       }
@@ -63,6 +66,36 @@ export default {
       })
       .then(response => {
         this.tasks = response.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    allCategories() {
+      axios({
+        method: "GET",
+        url: this.server+"/categories",
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      })
+      .then(response => {
+        this.categories = response.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    deleteTask(id) {
+      axios({
+        method: "DELETE",
+        url: this.server+`/tasks/${id}`,
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      })
+      .then(response => {
+        this.checkAuth()
       })
       .catch(err => {
         console.log(err)

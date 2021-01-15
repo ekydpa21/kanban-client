@@ -2,12 +2,26 @@
 
   <div>
 
+    <!-- <div v-if="errorMsg" id="error" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {{errorMsg}}
+          </div>
+        </div>
+      </div>
+    </div> -->
+
     <div class="container-fluid" id="register-container">
 
       <!-- Navbar -->
       <nav class="navbar navbar-dark" id="navbar-register">
         <div class="container-fluid">
-          <h2><a class="navbar-brand">Kanban</a></h2>
+          <h2><a class="navbar-brand">Kanban App</a></h2>
         </div>
       </nav>
 
@@ -18,6 +32,7 @@
           <div class="card">
             <h3 class="card-header">Register</h3>
             <div class="card-body">
+              <h5 v-if="errorMsg" id="error">{{errorMsg}}</h5>
               <div class="mb-3">
                 <label class="form-label">First Name</label>
                 <input v-model="firstName" type="text" class="form-control" id="firstName" placeholder="Enter your First Name here">
@@ -34,7 +49,7 @@
                 <label class="form-label">Password</label>
                 <input v-model="passwordRegister" type="password" class="form-control" id="password" placeholder="Enter your Password here">
               </div>
-              <h5>Already have an account ? <a href="#" @click.prevent="$emit('movePage', 'login')">Log In</a> here</h5>
+              <p>Already have an account ? <a href="#" @click.prevent="$emit('movePage', 'login')">Log In</a> here</p>
               <button @click.prevent="register()" type="submit" class="btn btn-primary">Submit</button>
             </div>
           </div>
@@ -59,7 +74,8 @@ export default {
       firstName: "",
       lastName: "",
       emailRegister: "",
-      passwordRegister: ""
+      passwordRegister: "",
+      errorMsg: ""
     }
   },
   methods: {
@@ -82,13 +98,23 @@ export default {
         this.passwordRegister = ""
       })
       .catch(err => {
-        console.log(err)
+        let msg = ""
+        err.response.data.map(e => {
+          msg += e + ", "
+        })
+        this.errorMsg = msg
+        this.firstName = ""
+        this.lastName = ""
+        this.emailRegister = ""
+        this.passwordRegister = ""
       })
     },
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+  #error {
+    color: red;
+  }
 </style>
